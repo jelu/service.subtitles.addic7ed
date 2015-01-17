@@ -28,7 +28,7 @@ __language__   = __addon__.getLocalizedString
 __cwd__        = xbmc.translatePath( __addon__.getAddonInfo('path') ).decode("utf-8")
 __profile__    = xbmc.translatePath( __addon__.getAddonInfo('profile') ).decode("utf-8")
 __resource__   = xbmc.translatePath( os.path.join( __cwd__, 'resources', 'lib' ) ).decode("utf-8")
-__temp__       = xbmc.translatePath( os.path.join( __profile__, 'temp') ).decode("utf-8")
+__temp__       = xbmc.translatePath( os.path.join( __profile__, 'temp', 'addic7ed' ) ).decode("utf-8")
 
 sys.path.append (__resource__)
 
@@ -174,11 +174,11 @@ def Search(item):
 def download(link):
   subtitle_list = []
 
-  if xbmcvfs.exists(__temp__):
-    shutil.rmtree(__temp__)
-  xbmcvfs.mkdirs(__temp__)
+  if not xbmcvfs.exists(__temp__):
+    xbmcvfs.mkdirs(__temp__)
 
   file = os.path.join(__temp__, "addic7ed.srt")
+  os.unlink(file);
 
   f = get_url(link)
 
